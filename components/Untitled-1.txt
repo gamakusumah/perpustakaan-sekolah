@@ -1,0 +1,128 @@
+"use client";
+import Link from "next/link";
+import { Children, useState } from "react";
+import { HiLibrary } from "react-icons/hi";
+import { BiSolidBookAlt, BiLibrary } from "react-icons/bi";
+import { IoIosListBox } from "react-icons/io";
+import { IoLibrarySharp, IoPeople } from "react-icons/io5";
+import { RiAdminFill } from "react-icons/ri";
+
+const Sidebar = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="flex w-full">
+      <button
+        type="button"
+        className="w-12 h-12 bg-black text-white fixed bottom-7 right-7 z-50 lg:hidden"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen === true ? "Close" : "Open"}
+      </button>
+      <aside
+        className={`bg-white h-screen fixed top-0 left-0 overflow-hidden transition-all duration-500 ease-in-out lg:w-64 lg:static border ${
+          isOpen === true ? "w-screen" : "w-0"
+        }`}
+      >
+        <div className="flex items-center lg:block lg:items-start w-full h-full">
+          <Link
+            href="/"
+            className="font-bold text-xl text-blue-500 text-center w-full block my-5"
+          >
+            Perpustakaan
+          </Link>
+          <ul className="w-full lg:p-2 text-gray-600">
+            <li>
+              <Link
+                href="/"
+                className="w-full h-10 flex items-center justify-center lg:rounded-xl mb-1 group lg:justify-normal px-5 hover:bg-gray-100 "
+              >
+                <IoIosListBox
+                  size={20}
+                  className="mr-2 fill-gray-500 group-hover:fill-gray-600"
+                />
+                Peminjaman
+              </Link>
+              <Link
+                href="/"
+                className="w-full h-12 flex items-center justify-center lg:justify-normal px-5 hover:bg-gray-100 "
+              >
+                <IoLibrarySharp size={20} className="mr-2 fill-gray-500" />
+                Buku
+              </Link>
+              <Link
+                href="/"
+                className="w-full h-12 flex items-center justify-center lg:justify-normal px-5 hover:bg-gray-100 "
+              >
+                <IoPeople size={20} className="mr-2 fill-gray-500" />
+                Peminjam
+              </Link>
+              <Link
+                href="/"
+                className="w-full h-12 flex items-center justify-center lg:justify-normal px-5 hover:bg-gray-100 "
+              >
+                <RiAdminFill size={20} className="mr-2 fill-gray-500" />
+                Pustakawan
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <main className="w-full p-5 bg-gray-100">{children}</main>
+    </div>
+  );
+};
+
+export default Sidebar;
+
+
+
+import Link from "next/link";
+import { MdDelete, MdEdit } from "react-icons/md";
+
+const Table = (props) => {
+  return (
+    <div className="card">
+      <table className="w-full">
+        <thead className="text-left h-3 text-gray-800">
+          <tr>
+            <th className="py-2">Id</th>
+            <th>Judul</th>
+            <th>Pengarang</th>
+            <th>Penerbit</th>
+            <th>Tahun Terbit</th>
+            <th>ISBN</th>
+            <th>Opsi</th>
+          </tr>
+        </thead>
+        <tbody className="text-gray-700">
+          <tr className="border-b">
+            <td className="py-2">1231</td>
+            <td>Laskar Pelangi</td>
+            <td>Gama Kusumah</td>
+            <td>Gramedia</td>
+            <td>2023</td>
+            <td>985-5461-645-45</td>
+            <td>
+              <div className="flex items-cente">
+                <button type="button">
+                  <MdDelete
+                    size={18}
+                    className="fill-red-400 hover:fill-red-500 mr-2"
+                  />
+                </button>
+                <Link href={"/"}>
+                  <MdEdit
+                    size={18}
+                    className="fill-yellow-400 hover:fill-yellow-500"
+                  />
+                </Link>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default Table;
