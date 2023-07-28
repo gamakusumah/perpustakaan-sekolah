@@ -84,7 +84,7 @@ const EditForm = (props) => {
                 value={newNama}
               />
             </div>
-            <div>
+            <div className="w-full">
               <label
                 htmlFor="status"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -166,7 +166,7 @@ const EditForm = (props) => {
                 value={newNoHp}
               />
             </div>
-            <div className="col-span-2">
+            <div className="w-full lg:col-span-2">
               <label
                 htmlFor="alamat"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

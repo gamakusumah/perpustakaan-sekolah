@@ -17,27 +17,27 @@ const TambahForm = async ({ params }) => {
   return (
     <main>
       <section className="mb-7">
-        <h1 className="text-xl mb-2 font-bold text-gray-700 dark:text-white">
+        <h1 className="text-xl mb-3 font-bold text-gray-700 dark:text-white">
           Detail Peminjaman
         </h1>
-        <div className="p-4 w-full bg-white dark:bg-gray-900 rounded-xl text-sm text-gray-700 grid grid-flow-col">
-          <div>
+        <div className="p-4 w-full bg-white dark:bg-gray-900 rounded-xl text-sm text-gray-700 grid gap-5 lg:gap-0 lg:grid-flow-col">
+          <div className="flex justify-between lg:block">
             <p className="font-medium">Tanggal Peminjaman</p>
             <p className="text-gray-500">
               {new Date(peminjaman.createdAt).toLocaleDateString("id-ID")}
             </p>
           </div>
-          <div>
+          <div className="flex justify-between lg:block">
             <p className="font-medium">Jumlah Buku</p>
             <p className="text-gray-500">{buku.length}</p>
           </div>
-          <div>
+          <div className="flex justify-between lg:block">
             <p className="font-medium">Pustakawan</p>
             <p className="text-gray-500">
               {pustakawan.nama}- {pustakawan.jabatan}
             </p>
           </div>
-          <div>
+          <div className="flex justify-between lg:block">
             <p className="font-medium">Tanggal Pengembalian</p>
             <p className="text-gray-500">
               {tanggalPengembalian !== null
@@ -45,24 +45,24 @@ const TambahForm = async ({ params }) => {
                 : "-"}
             </p>
           </div>
-
-          <div>
+          <div className="flex justify-between lg:block">
             <p className="font-medium mb-1">Status Peminjaman</p>
 
             {peminjaman.status === "Sudah dikembalikan" ? (
-              <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+              <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
                 {peminjaman.status}
               </span>
             ) : (
-              <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+              <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
                 {peminjaman.status}
               </span>
             )}
           </div>
         </div>
       </section>
+
       <section className="w-full mb-7">
-        <div className="flex justify-between mb-2 items-center">
+        <div className="lg:flex justify-between mb-3 items-center">
           <h2 className="text-md font-bold text-gray-700 dark:text-white">
             Peminjam
           </h2>
@@ -87,7 +87,7 @@ const TambahForm = async ({ params }) => {
                 disabled
               />
             </div>
-            <div>
+            <div className="w-full">
               <label
                 for="status"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -166,7 +166,7 @@ const TambahForm = async ({ params }) => {
                 min={0}
               />
             </div>
-            <div className="col-span-3">
+            <div className="w-full lg:col-span-3">
               <label
                 for="alamat"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -188,7 +188,7 @@ const TambahForm = async ({ params }) => {
       </section>
 
       <section className="mb-5 col-span-2">
-        <div className="flex justify-between mb-2 items-center">
+        <div className="lg:flex justify-between mb-3 items-center">
           <h2 className="text-md font-bold text-gray-700 dark:text-white">
             Detail Buku
           </h2>
@@ -233,7 +233,7 @@ const TambahForm = async ({ params }) => {
                   <td className="px-6 py-4">{b.pengarang}</td>
                   <td className="px-6 py-4">{b.penerbit}</td>
                   <td className="px-6 py-4">{b.tahunTerbit}</td>
-                  <td className="px-6 py-4">{b.isbn}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{b.isbn}</td>
                 </tr>
               ))}
             </tbody>

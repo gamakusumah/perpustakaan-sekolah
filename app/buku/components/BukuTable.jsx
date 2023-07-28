@@ -81,7 +81,7 @@ const BukuTable = (props) => {
                   <td className="px-6 py-4">{buku.pengarang}</td>
                   <td className="px-6 py-4">{buku.penerbit}</td>
                   <td className="px-6 py-4">{buku.tahunTerbit}</td>
-                  <td className="px-6 py-4">{buku.isbn}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{buku.isbn}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-cente">
                       <DeleteButton url={`${props.apiUrl}?id=${buku._id}`} />

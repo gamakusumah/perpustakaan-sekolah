@@ -60,7 +60,7 @@ const TambahForm = (props) => {
                 onChange={(e) => setNama(e.target.value)}
               />
             </div>
-            <div>
+            <div className="w-full">
               <label
                 for="jabatan"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -93,7 +93,7 @@ const TambahForm = (props) => {
                 onChange={(e) => setNoHp(e.target.value)}
               />
             </div>
-            <div className="col-span-2">
+            <div className="w-full lg:col-span-2">
               <label
                 for="alamat"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

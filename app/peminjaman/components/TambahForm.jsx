@@ -76,13 +76,13 @@ const TambahForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <section className="w-full mb-7">
-        <div className="flex justify-between mb-2 items-center">
+        <div className="lg:flex justify-between mb-3 items-center">
           <h2 className="text-xl font-bold text-gray-700 dark:text-white">
             Data Peminjam
           </h2>
 
           {/* Search Bar */}
-          <div className="relative mt-1">
+          <div className="relative mt-5 lg:mt-1">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <MdSearch
                 className="text-gray-500 dark:text-gray-400"
@@ -235,7 +235,7 @@ const TambahForm = (props) => {
                 min={0}
               />
             </div>
-            <div className="col-span-3">
+            <div className="w-full lg:col-span-3">
               <label
                 for="alamat"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -257,12 +257,12 @@ const TambahForm = (props) => {
       </section>
 
       <section className="mb-5 col-span-2">
-        <div className="flex justify-between mb-2 items-center">
+        <div className="lg:flex justify-between mb-3 items-center">
           <h2 className="text-xl font-bold text-gray-700 dark:text-white">
             Detail Buku
           </h2>
           {/* Search Bar */}
-          <div className="relative mt-1">
+          <div className="relative mt-5 lg:mt-1">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <MdSearch
                 className="text-gray-500 dark:text-gray-400"
@@ -310,7 +310,9 @@ const TambahForm = (props) => {
                     <p className="text-xs text-gray-600">
                       {b.penerbit} - {b.tahunTerbit}
                     </p>
-                    <p className="text-xs text-gray-600 mt-1">{b.isbn}</p>
+                    <p className="text-xs text-gray-600 mt-1 whitespace-nowrap">
+                      {b.isbn}
+                    </p>
                   </div>
                 ))}
             </div>
@@ -359,7 +361,7 @@ const TambahForm = (props) => {
                   <td className="px-6 py-4">{b.pengarang}</td>
                   <td className="px-6 py-4">{b.penerbit}</td>
                   <td className="px-6 py-4">{b.tahunTerbit}</td>
-                  <td className="px-6 py-4">{b.isbn}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{b.isbn}</td>
                   <td className="px-6 py-4">
                     <button type="button" onClick={() => deleteBuku(b)}>
                       <MdDelete
