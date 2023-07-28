@@ -1,5 +1,6 @@
 import React from "react";
 import { HiLibrary } from "react-icons/hi";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -29,15 +30,12 @@ const Navbar = () => {
                 ></path>
               </svg>
             </button>
-            <a
-              href="https://flowbite.com"
-              className="flex ml-2 md:mr-24 items-center"
-            >
+            <Link href="/" className="flex ml-2 md:mr-24 items-center">
               <HiLibrary size={28} className="mr-1 fill-blue-600" />
               <span className="font-poppins self-center text-xl font-semibold text-blue-500 sm:text-2xl whitespace-nowrap dark:text-white">
                 Perpustakaan
               </span>
-            </a>
+            </Link>
           </div>
           <div className="flex items-center">
             <div className="flex items-center ml-3">

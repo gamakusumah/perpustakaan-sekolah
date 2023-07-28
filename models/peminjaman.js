@@ -9,7 +9,7 @@ const peminjamanSchema = new Schema(
       alamat: String,
       status: String,
       kelas: String || null,
-      angkatan: Number,
+      angkatan: Number || null,
     },
     buku: [
       {
@@ -17,6 +17,8 @@ const peminjamanSchema = new Schema(
           _id: String,
           judul: String,
           pengarang: String,
+          penerbit: String,
+          tahunTerbit: Number,
           isbn: String,
         }),
       },
@@ -26,10 +28,8 @@ const peminjamanSchema = new Schema(
       nama: String,
       jabatan: String,
     },
-    pengembalian: {
-      tanggal: Date,
-      denda: Number || null,
-    },
+    tanggalPengembalian: Date || null,
+    status: String,
   },
   {
     timestamps: true,

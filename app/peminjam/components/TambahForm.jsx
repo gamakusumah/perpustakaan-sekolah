@@ -2,117 +2,159 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createData } from "@/libs/functions";
 
 const TambahForm = (props) => {
-  const [judul, setJudul] = useState("");
-  const [pengarang, setPengarang] = useState("");
-  const [penerbit, setPenerbit] = useState("");
-  const [tahunTerbit, setTahunTerbit] = useState(0);
-  const [isbn, setISBN] = useState("");
+  const [nama, setNama] = useState("");
+  const [status, setStatus] = useState("Siswa");
+  const [kelas, setKelas] = useState("");
+  const [angkatan, setAngkatan] = useState("");
+  const [noHp, setNoHp] = useState("");
+  const [alamat, setAlamat] = useState("");
 
   const router = useRouter();
   const apiUrl = props.apiUrl;
 
-  const body = { judul, pengarang, penerbit, tahunTerbit, isbn };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    createData(apiUrl, body, router, "buku");
+    try {
+      const res = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ nama, status, kelas, angkatan, noHp, alamat }),
+      });
+
+      if (res.ok) {
+        router.refresh();
+        router.push("/peminjam");
+      } else {
+        throw new Error("Gagal menambah peminjam");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <section>
       <h2 className="mb-4 text-xl font-bold text-gray-700 dark:text-white">
-        Tambah buku baru
+        Tambah Peminjam Baru
       </h2>
       <div className="p-4 max-w-2xl bg-white dark:bg-gray-900 rounded-xl">
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div className="w-full">
               <label
-                htmlFor="judul"
+                for="nama"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Judul
+                Nama Peminjam
               </label>
               <input
                 type="text"
-                name="judul"
-                id="judul"
+                name="nama"
+                id="nama"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Judul Buku"
+                placeholder="Nama Peminjam"
                 required=""
-                onChange={(e) => setJudul(e.target.value)}
+                onChange={(e) => setNama(e.target.value)}
+              />
+            </div>
+            <div>
+              <label
+                for="status"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Status
+              </label>
+              <select
+                id="status"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="Siswa">Siswa</option>
+                <option value="Guru">Guru</option>
+                <option value="Staff">Staff</option>
+              </select>
+            </div>
+            <div className="w-full">
+              <label
+                for="kelas"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Kelas
+                <span className="text-xs font-normal text-gray-500 italic">
+                  {" "}
+                  * hanya untuk siswa
+                </span>
+              </label>
+              <input
+                type="text"
+                name="kelas"
+                id="kelas"
+                className="bg-gray-50 border uppercase border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="X RPL 3"
+                onChange={(e) => setKelas(e.target.value.toUpperCase())}
+                disabled={status === "Siswa" ? false : true}
               />
             </div>
             <div className="w-full">
               <label
-                htmlFor="pengarang"
+                for="angkatan"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Pengarang
-              </label>
-              <input
-                type="text"
-                name="pengarang"
-                id="pengarang"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Pengarang Buku"
-                required=""
-                onChange={(e) => setPengarang(e.target.value)}
-              />
-            </div>
-            <div className="w-full">
-              <label
-                htmlFor="penerbit"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Penerbit
-              </label>
-              <input
-                type="text"
-                name="penerbit"
-                id="penerbit"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Penerbit Buku"
-                required=""
-                onChange={(e) => setPenerbit(e.target.value)}
-              />
-            </div>
-            <div className="w-full">
-              <label
-                htmlFor="tahun-terbit"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Tahun Terbit
+                Angkatan
+                <span className="text-xs font-normal text-gray-500 italic">
+                  {" "}
+                  * hanya untuk siswa
+                </span>
               </label>
               <input
                 type="number"
-                name="tahun-terbit"
-                id="tahun-terbit"
+                name="angkatan"
+                id="angkatan"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="2023"
-                required=""
-                onChange={(e) => setTahunTerbit(e.target.value)}
+                min={0}
+                onChange={(e) => setAngkatan(e.target.value)}
+                disabled={status === "Siswa" ? false : true}
               />
             </div>
             <div className="w-full">
               <label
-                htmlFor="isbn"
+                for="noHp"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                ISBN
+                No Handphone
+              </label>
+              <input
+                type="number"
+                name="noHp"
+                id="noHp"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="08123456789"
+                required=""
+                min={0}
+                onChange={(e) => setNoHp(e.target.value)}
+              />
+            </div>
+            <div className="col-span-2">
+              <label
+                for="alamat"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Alamat
               </label>
               <input
                 type="text"
-                name="isbn"
-                id="isbn"
+                name="alamat"
+                id="alamat"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="000-000-000-000-0"
+                placeholder="Alamat Peminjam"
                 required=""
-                onChange={(e) => setISBN(e.target.value)}
+                onChange={(e) => setAlamat(e.target.value)}
               />
             </div>
           </div>
@@ -121,11 +163,11 @@ const TambahForm = (props) => {
               type="submit"
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
-              Tambah buku
+              Tambah Peminjam
             </button>
 
             <Link
-              href="/buku"
+              href="/peminjam"
               className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Batal

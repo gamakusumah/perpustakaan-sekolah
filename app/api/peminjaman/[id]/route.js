@@ -1,16 +1,13 @@
 import Peminjaman from "@/models/peminjaman";
 import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
+import { IoBodyOutline } from "react-icons/io5";
 
 export async function PUT(req, { params }) {
   const { id } = params;
-  const {
-    newPeminjam: peminjam,
-    newBuku: buku,
-    newPustakawan: pustakawan,
-  } = await req.json();
+  const body = await req.json();
   await connectMongoDB();
-  await Peminjaman.findByIdAndUpdate(id, { peminjam, buku, pustakawan });
+  await Peminjaman.findByIdAndUpdate(id, body);
   return NextResponse.json(
     { message: "Peminjaman berhasil diubah" },
     { status: 200 }

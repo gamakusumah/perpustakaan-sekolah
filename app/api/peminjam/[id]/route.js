@@ -15,11 +15,11 @@ export async function PUT(req, { params }) {
   await connectMongoDB();
   await Peminjam.findByIdAndUpdate(id, {
     nama,
-    noHp,
-    alamat,
     status,
     kelas,
     angkatan,
+    noHp,
+    alamat,
   });
   return NextResponse.json(
     { message: "Peminjam berhasil diubah" },
