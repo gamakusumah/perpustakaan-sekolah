@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { MdEdit, MdRemoveRedEye } from "react-icons/md";
-import AddButton from "../../../components/AddButton";
-import DeleteButton from "../../../components/DeleteButton";
+import AddButton from "@/components/AddButton";
+import DeleteButton from "@/components/DeleteButton";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 

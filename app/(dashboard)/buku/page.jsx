@@ -1,4 +1,4 @@
-import BukuTable from "@/app/buku/components/BukuTable";
+import BukuTable from "./components/BukuTable";
 import { getData } from "@/libs/functions";
 
 export default async function Buku() {

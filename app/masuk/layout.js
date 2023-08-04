@@ -1,5 +1,4 @@
-import Sidebar from "@/components/Sidebar";
-import "./globals.css";
+import "../globals.css";
 import { Inter, Poppins } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -19,9 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.variable}, ${poppins.variable}`}>
-        <div className="flex">
-          <Sidebar>{children}</Sidebar>
-        </div>
+        {children}
       </body>
     </html>
   );

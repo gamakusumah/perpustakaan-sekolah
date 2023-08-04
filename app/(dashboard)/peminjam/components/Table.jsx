@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
 import { MdEdit } from "react-icons/md";
-import AddButton from "../../../components/AddButton";
-import DeleteButton from "../../../components/DeleteButton";
+import AddButton from "@/components/AddButton";
+import DeleteButton from "@/components/DeleteButton";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 
-const BukuTable = (props) => {
+const Table = (props) => {
   const data = props.data || [];
   const [search, setSearch] = useState("");
 
@@ -26,7 +26,7 @@ const BukuTable = (props) => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <AddButton href="/buku/tambah" model="Buku" />
+        <AddButton href="/peminjam/tambah" model="Peminjam" />
       </div>
       <div className="relative overflow-x-auto rounded-xl">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -35,20 +35,23 @@ const BukuTable = (props) => {
               <th scope="col" className="px-6 py-3 w-10">
                 No
               </th>
-              <th scope="col" className="px-6 py-3">
-                Judul
+              <th scope="col" className="px-6 py-3 whitespace-nowrap">
+                Nama Peminjam
               </th>
               <th scope="col" className="px-6 py-3">
-                Pengarang
+                Status
               </th>
               <th scope="col" className="px-6 py-3">
-                Penerbit
+                Kelas
               </th>
               <th scope="col" className="px-6 py-3">
-                Tahun Terbit
+                Angkatan
+              </th>
+              <th scope="col" className="px-6 py-3 whitespace-nowrap">
+                No Handphone
               </th>
               <th scope="col" className="px-6 py-3">
-                ISBN
+                Alamat
               </th>
               <th scope="col" className="px-6 py-3">
                 Opsi
@@ -57,16 +60,17 @@ const BukuTable = (props) => {
           </thead>
           <tbody>
             {data
-              .filter((buku) => {
+              .filter((peminjam) => {
                 return search.toLocaleLowerCase() === ""
-                  ? buku
-                  : buku.judul.toLowerCase().includes(search) ||
-                      buku.pengarang.toLowerCase().includes(search) ||
-                      buku.penerbit.toLowerCase().includes(search) ||
-                      buku.tahunTerbit.toString().includes(search) ||
-                      buku.isbn.toLowerCase().includes(search);
+                  ? peminjam
+                  : peminjam.nama.toLowerCase().includes(search) ||
+                      peminjam.status.toLowerCase().includes(search) ||
+                      peminjam.kelas.toLowerCase().includes(search) ||
+                      peminjam.angkatan.toString().includes(search) ||
+                      peminjam.noHp.toLowerCase().includes(search) ||
+                      peminjam.alamat.toLowerCase().includes(search);
               })
-              .map((buku, i) => (
+              .map((peminjam, i) => (
                 <tr
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   key={i + 1}
@@ -77,15 +81,22 @@ const BukuTable = (props) => {
                   >
                     {i + 1}
                   </th>
-                  <td className="px-6 py-4">{buku.judul}</td>
-                  <td className="px-6 py-4">{buku.pengarang}</td>
-                  <td className="px-6 py-4">{buku.penerbit}</td>
-                  <td className="px-6 py-4">{buku.tahunTerbit}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{buku.isbn}</td>
+                  <td className="px-6 py-4">{peminjam.nama}</td>
+                  <td className="px-6 py-4">{peminjam.status}</td>
+                  <td className="px-6 py-4 w-28">{peminjam.kelas}</td>
+                  <td className="px-6 py-4">{peminjam.angkatan}</td>
+                  <td className="px-6 py-4">{peminjam.noHp}</td>
+                  <td className="px-6 py-4">
+                    <p className="truncate w-56 hover:whitespace-normal">
+                      {peminjam.alamat}
+                    </p>
+                  </td>
                   <td className="px-6 py-4">
                     <div className="flex items-cente">
-                      <DeleteButton url={`${props.apiUrl}?id=${buku._id}`} />
-                      <Link href={`/buku/edit/${buku._id}`}>
+                      <DeleteButton
+                        url={`${props.apiUrl}?id=${peminjam._id}`}
+                      />
+                      <Link href={`/peminjam/edit/${peminjam._id}`}>
                         <MdEdit
                           size={18}
                           className="fill-yellow-400 hover:fill-yellow-500"
@@ -102,4 +113,4 @@ const BukuTable = (props) => {
   );
 };
 
-export default BukuTable;
+export default Table;

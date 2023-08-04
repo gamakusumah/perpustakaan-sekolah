@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { MdEdit } from "react-icons/md";
-import AddButton from "../../../components/AddButton";
-import DeleteButton from "../../../components/DeleteButton";
+import AddButton from "@/components/AddButton";
+import DeleteButton from "@/components/DeleteButton";
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 
@@ -26,7 +26,7 @@ const Table = (props) => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <AddButton href="/peminjam/tambah" model="Peminjam" />
+        <AddButton href="/pustakawan/tambah" model="pustakawan" />
       </div>
       <div className="relative overflow-x-auto rounded-xl">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -36,16 +36,10 @@ const Table = (props) => {
                 No
               </th>
               <th scope="col" className="px-6 py-3 whitespace-nowrap">
-                Nama Peminjam
+                Nama Pustakawan
               </th>
               <th scope="col" className="px-6 py-3">
-                Status
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Kelas
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Angkatan
+                Jabatan
               </th>
               <th scope="col" className="px-6 py-3 whitespace-nowrap">
                 No Handphone
@@ -60,17 +54,15 @@ const Table = (props) => {
           </thead>
           <tbody>
             {data
-              .filter((peminjam) => {
+              .filter((pustakawan) => {
                 return search.toLocaleLowerCase() === ""
-                  ? peminjam
-                  : peminjam.nama.toLowerCase().includes(search) ||
-                      peminjam.status.toLowerCase().includes(search) ||
-                      peminjam.kelas.toLowerCase().includes(search) ||
-                      peminjam.angkatan.toString().includes(search) ||
-                      peminjam.noHp.toLowerCase().includes(search) ||
-                      peminjam.alamat.toLowerCase().includes(search);
+                  ? pustakawan
+                  : pustakawan.nama.toLowerCase().includes(search) ||
+                      pustakawan.jabatan.toLowerCase().includes(search) ||
+                      pustakawan.noHp.toLowerCase().includes(search) ||
+                      pustakawan.alamat.toString().includes(search);
               })
-              .map((peminjam, i) => (
+              .map((pustakawan, i) => (
                 <tr
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                   key={i + 1}
@@ -81,22 +73,21 @@ const Table = (props) => {
                   >
                     {i + 1}
                   </th>
-                  <td className="px-6 py-4">{peminjam.nama}</td>
-                  <td className="px-6 py-4">{peminjam.status}</td>
-                  <td className="px-6 py-4 w-28">{peminjam.kelas}</td>
-                  <td className="px-6 py-4">{peminjam.angkatan}</td>
-                  <td className="px-6 py-4">{peminjam.noHp}</td>
+                  <td className="px-6 py-4">{pustakawan.nama}</td>
+                  <td className="px-6 py-4">{pustakawan.jabatan}</td>
+                  <td className="px-6 py-4">{pustakawan.noHp}</td>
                   <td className="px-6 py-4">
-                    <p className="truncate w-56 hover:whitespace-normal">
-                      {peminjam.alamat}
+                    <p className="truncate w-96 hover:whitespace-normal">
+                      {pustakawan.alamat}
                     </p>
                   </td>
+
                   <td className="px-6 py-4">
                     <div className="flex items-cente">
                       <DeleteButton
-                        url={`${props.apiUrl}?id=${peminjam._id}`}
+                        url={`${props.apiUrl}?id=${pustakawan._id}`}
                       />
-                      <Link href={`/peminjam/edit/${peminjam._id}`}>
+                      <Link href={`/pustakawan/edit/${pustakawan._id}`}>
                         <MdEdit
                           size={18}
                           className="fill-yellow-400 hover:fill-yellow-500"
