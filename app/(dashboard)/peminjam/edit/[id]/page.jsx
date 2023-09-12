@@ -4,6 +4,8 @@ import EditForm from "../../components/EditForm";
 const hostUrl = process.env.HOST_URL;
 const apiUrl = `${hostUrl}/api/peminjam`;
 
+export const dynamic = "force-static";
+
 const getPeminjam = async (id) => {
   try {
     const res = await fetch(`${apiUrl}/${id}`, {

@@ -4,6 +4,8 @@ import EditForm from "../../components/EditForm";
 const hostUrl = process.env.HOST_URL;
 const apiUrl = `${hostUrl}/api/pustakawan`;
 
+export const dynamic = "force-static";
+
 const getPustakawan = async (id) => {
   try {
     const res = await fetch(`${apiUrl}/${id}`, {

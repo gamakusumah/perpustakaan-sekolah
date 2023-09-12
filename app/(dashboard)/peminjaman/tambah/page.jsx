@@ -1,6 +1,8 @@
 import TambahForm from "../components/TambahForm";
 import { getData } from "@/libs/functions";
 
+export const dynamic = "force-static";
+
 const TambahPage = async () => {
   const hostUrl = process.env.HOST_URL;
   const peminjamanApiUrl = `${hostUrl}/api/peminjaman`;

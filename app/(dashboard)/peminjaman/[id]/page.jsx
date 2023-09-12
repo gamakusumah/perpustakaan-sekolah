@@ -2,6 +2,8 @@ import { getDataById } from "@/libs/functions";
 import Link from "next/link";
 import SelesaiButton from "../components/SelesaiButton";
 
+export const dynamic = "force-static";
+
 const TambahForm = async ({ params }) => {
   const hostUrl = process.env.HOST_URL;
   const apiUrl = `${hostUrl}/api/peminjaman`;

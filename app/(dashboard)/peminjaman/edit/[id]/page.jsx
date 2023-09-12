@@ -1,6 +1,8 @@
 import EditForm from "../../components/EditForm";
 import { getData, getDataById } from "@/libs/functions";
 
+export const dynamic = "force-static";
+
 const EditPage = async ({ params }) => {
   const hostUrl = process.env.HOST_URL;
   const peminjamanApiUrl = `${hostUrl}/api/peminjaman`;
