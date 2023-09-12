@@ -1,6 +1,8 @@
 import { getData } from "@/libs/functions";
 import Table from "./components/Table";
 
+export const dynamic = "force-static";
+
 export default async function Peminjaman() {
   const hostUrl = process.env.HOST_URL;
   const apiUrl = `${hostUrl}/api/peminjaman`;
