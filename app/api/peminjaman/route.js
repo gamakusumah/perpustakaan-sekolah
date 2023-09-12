@@ -5,6 +5,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-static";
+
 export async function POST(req) {
   const body = await req.json();
   await connectMongoDB();

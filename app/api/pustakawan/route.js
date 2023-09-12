@@ -6,6 +6,8 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 
+export const dynamic = "force-static";
+
 export async function POST(req) {
   const { nama, jabatan, email, noHp, alamat, password } = await req.json();
   const hashedPassword = await bcrypt.hash(password, 10);

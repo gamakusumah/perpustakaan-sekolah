@@ -3,7 +3,8 @@ import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
+
+export const dynamic = "force-static";
 
 export async function POST(req) {
   const { nama, noHp, alamat, status, kelas, angkatan } = await req.json();
