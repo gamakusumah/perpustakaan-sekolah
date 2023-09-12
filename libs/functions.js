@@ -1,10 +1,7 @@
-import { headers } from "next/headers";
-
 export const getData = async (apiUrl) => {
   try {
     const res = await fetch(apiUrl, {
-      method: "GET",
-      headers: headers(),
+      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -20,8 +17,7 @@ export const getData = async (apiUrl) => {
 export const getDataById = async (apiUrl, id) => {
   try {
     const res = await fetch(`${apiUrl}/${id}`, {
-      method: "GET",
-      headers: headers(),
+      cache: "no-store",
     });
 
     if (!res.ok) {
