@@ -4,7 +4,9 @@ const pustakawanSchema = new Schema(
   {
     nama: String,
     jabatan: String,
+    email: String,
     noHp: String,
+    password: String,
     alamat: String,
   },
   {

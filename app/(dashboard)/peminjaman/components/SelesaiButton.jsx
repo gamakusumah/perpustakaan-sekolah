@@ -1,9 +1,27 @@
 "use client";
-import { setPengembalian } from "@/libs/functions";
 import { useRouter } from "next/navigation";
 
 const SelesaiButton = (props) => {
   const router = useRouter();
+
+  const setPengembalian = async (apiUrl, tanggalPengembalian, status) => {
+    try {
+      const res = await fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ tanggalPengembalian, status }),
+      });
+
+      if (res.ok) {
+        router.refresh();
+        router.push(`/peminjaman`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSelesai = () => {
     const confirmed = confirm("Apakah buku sudah dikembalikan?");
@@ -11,7 +29,7 @@ const SelesaiButton = (props) => {
     if (confirmed) {
       const tanggalPengembalian = Date.now();
       const status = "Sudah dikembalikan";
-      setPengembalian(props.apiUrl, tanggalPengembalian, status, router);
+      setPengembalian(props.apiUrl, tanggalPengembalian, status);
     }
   };
 

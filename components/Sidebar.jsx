@@ -6,10 +6,15 @@ import { IoIosListBox } from "react-icons/io";
 import { IoLibrarySharp, IoPeople } from "react-icons/io5";
 import { RiAdminFill } from "react-icons/ri";
 import { useState } from "react";
+import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Sidebar = ({ children }) => {
   const [isShow, setIsShow] = useState(false);
   const [profile, setProfile] = useState(false);
+
+  const { data: session } = useSession();
+
   return (
     <>
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -71,24 +76,24 @@ const Sidebar = ({ children }) => {
                       className="text-sm text-gray-900 dark:text-white"
                       role="none"
                     >
-                      Neil Sims
+                      {session?.user?.nama}
                     </p>
                     <p
                       className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                       role="none"
                     >
-                      neil.sims@flowbite.com
+                      {session?.user?.email}
                     </p>
                   </div>
                   <ul className="py-1" role="none">
                     <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                      <button
+                        className=" w-full block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                         role="menuitem"
+                        onClick={() => signOut()}
                       >
                         Keluar
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </div>

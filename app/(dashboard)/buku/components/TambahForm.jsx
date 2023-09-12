@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createData } from "@/libs/functions";
 
 const TambahForm = (props) => {
   const [judul, setJudul] = useState("");
@@ -16,10 +15,31 @@ const TambahForm = (props) => {
 
   const body = { judul, pengarang, penerbit, tahunTerbit, isbn };
 
+  const createData = async (apiUrl, body) => {
+    try {
+      const res = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (res.ok) {
+        router.refresh();
+        router.push("/buku");
+      } else {
+        throw new Error("Gagal menambah buku");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    createData(apiUrl, body, router, "buku");
+    createData(apiUrl, body);
   };
 
   return (

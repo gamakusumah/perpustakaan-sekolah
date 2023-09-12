@@ -7,7 +7,7 @@ const TambahForm = async ({ params }) => {
   const apiUrl = `${hostUrl}/api/peminjaman`;
 
   const id = params.id;
-  const { peminjaman } = (await getDataById(apiUrl, id)) || [];
+  const { peminjaman } = await getDataById(apiUrl, id);
 
   const peminjam = peminjaman.peminjam || {};
   const buku = peminjaman.buku || [];

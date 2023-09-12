@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 
 const TambahForm = (props) => {
   const [nama, setNama] = useState("");
-  const [jabatan, setJabatan] = useState("");
+  const [jabatan, setJabatan] = useState("Petugas");
   const [noHp, setNoHp] = useState(0);
   const [alamat, setAlamat] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [retypePassword, setRetypePassword] = useState(true);
 
   const router = useRouter();
   const apiUrl = props.apiUrl;
@@ -16,23 +19,52 @@ const TambahForm = (props) => {
     e.preventDefault();
 
     try {
-      const res = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ nama, jabatan, noHp, alamat }),
-      });
+      const resPustakawanExists = await fetch(
+        `http://localhost:3000/api/pustakawanExists`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
 
-      if (res.ok) {
-        router.refresh();
-        router.push("/pustakawan");
+      const { pustakawan } = await resPustakawanExists.json();
+
+      if (pustakawan) {
+        alert(`Email ${email} sudah terdaftar`);
+        return;
       } else {
-        throw new Error("Gagal menambah pustakawan");
+        const res = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            nama,
+            jabatan,
+            email,
+            noHp,
+            password,
+            alamat,
+          }),
+        });
+
+        if (res.ok) {
+          router.refresh();
+          router.push("/pustakawan");
+        } else {
+          throw new Error("Gagal menambah pustakawan");
+        }
       }
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const checkPassword = (value) => {
+    value === password ? setRetypePassword(true) : setRetypePassword(false);
   };
 
   return (
@@ -56,7 +88,7 @@ const TambahForm = (props) => {
                 id="nama"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Nama Pustakawan"
-                required=""
+                required
                 onChange={(e) => setNama(e.target.value)}
               />
             </div>
@@ -71,10 +103,28 @@ const TambahForm = (props) => {
                 id="jabatan"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 onChange={(e) => setJabatan(e.target.value)}
+                value={jabatan}
               >
                 <option value="Kepala">Kepala</option>
                 <option value="Petugas">Petugas</option>
               </select>
+            </div>
+            <div className="w-full">
+              <label
+                for="email"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="name@mail.com"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="w-full">
               <label
@@ -89,9 +139,50 @@ const TambahForm = (props) => {
                 id="no-handphone"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="08123456789"
-                required=""
+                required
                 onChange={(e) => setNoHp(e.target.value)}
               />
+            </div>
+            <div className="w-full">
+              <label
+                for="password"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Password"
+                minLength={8}
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="w-full">
+              <label
+                for="password"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Ketik Ulang Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Password"
+                minLength={8}
+                required
+                onChange={(e) => checkPassword(e.target.value)}
+              />
+              {!retypePassword && (
+                <span className="text-sm text-red-600">
+                  Password tidak sesuai!
+                </span>
+              )}
             </div>
             <div className="w-full lg:col-span-2">
               <label
@@ -106,7 +197,7 @@ const TambahForm = (props) => {
                 id="alamat"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Alamat"
-                required=""
+                required
                 onChange={(e) => setAlamat(e.target.value)}
               />
             </div>

@@ -65,8 +65,8 @@ const Table = (props) => {
                   ? peminjam
                   : peminjam.nama.toLowerCase().includes(search) ||
                       peminjam.status.toLowerCase().includes(search) ||
-                      peminjam.kelas.toLowerCase().includes(search) ||
-                      peminjam.angkatan.toString().includes(search) ||
+                      peminjam.kelas?.toLowerCase().includes(search) ||
+                      peminjam.angkatan?.toString().includes(search) ||
                       peminjam.noHp.toLowerCase().includes(search) ||
                       peminjam.alamat.toLowerCase().includes(search);
               })

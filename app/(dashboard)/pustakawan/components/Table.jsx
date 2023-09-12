@@ -41,6 +41,9 @@ const Table = (props) => {
               <th scope="col" className="px-6 py-3">
                 Jabatan
               </th>
+              <th scope="col" className="px-6 py-3">
+                Email
+              </th>
               <th scope="col" className="px-6 py-3 whitespace-nowrap">
                 No Handphone
               </th>
@@ -75,6 +78,7 @@ const Table = (props) => {
                   </th>
                   <td className="px-6 py-4">{pustakawan.nama}</td>
                   <td className="px-6 py-4">{pustakawan.jabatan}</td>
+                  <td className="px-6 py-4">{pustakawan.email}</td>
                   <td className="px-6 py-4">{pustakawan.noHp}</td>
                   <td className="px-6 py-4">
                     <p className="truncate w-96 hover:whitespace-normal">

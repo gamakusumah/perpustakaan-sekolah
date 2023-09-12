@@ -6,6 +6,7 @@ export default async function PeminjamPage() {
   const apiUrl = `${hostUrl}/api/peminjam`;
 
   const { data } = await getData(apiUrl);
+
   return (
     <main>
       <h1 className="font-bold text-2xl text-gray-700 mb-5">Daftar Peminjam</h1>

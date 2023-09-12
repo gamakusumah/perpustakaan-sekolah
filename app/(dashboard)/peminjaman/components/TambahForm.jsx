@@ -112,7 +112,9 @@ const TambahForm = (props) => {
                         peminjam.status
                           .toLowerCase()
                           .includes(searchPeminjam) ||
-                        peminjam.kelas.toLowerCase().includes(searchPeminjam) ||
+                        peminjam.kelas
+                          ?.toLowerCase()
+                          .includes(searchPeminjam) ||
                         peminjam.noHp.toLowerCase().includes(searchPeminjam) ||
                         peminjam.alamat.toLowerCase().includes(searchPeminjam);
                 })

@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import EditForm from "../../components/EditForm";
 
 const hostUrl = process.env.HOST_URL;
@@ -6,7 +7,8 @@ const apiUrl = `${hostUrl}/api/peminjam`;
 const getPeminjam = async (id) => {
   try {
     const res = await fetch(`${apiUrl}/${id}`, {
-      cache: "no-store",
+      method: "GET",
+      headers: headers(),
     });
 
     if (!res.ok) {

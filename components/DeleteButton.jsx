@@ -5,8 +5,8 @@ import { MdDelete } from "react-icons/md";
 const DeleteButton = (props) => {
   const router = useRouter();
 
-  const deleteBuku = async () => {
-    const confirmed = confirm("Hapus buku?");
+  const deleteData = async () => {
+    const confirmed = confirm("Hapus data?");
     if (confirmed) {
       const res = await fetch(`${props.url}`, {
         method: "DELETE",
@@ -17,7 +17,7 @@ const DeleteButton = (props) => {
     }
   };
   return (
-    <button type="button" onClick={() => deleteBuku()}>
+    <button type="button" onClick={() => deleteData()}>
       <MdDelete size={18} className="fill-red-400 hover:fill-red-500 mr-2" />
     </button>
   );

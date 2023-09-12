@@ -1,6 +1,9 @@
 import Pustakawan from "@/models/pustakawan";
 import connectMongoDB from "@/libs/mongodb";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 export async function PUT(req, { params }) {
   const { id } = params;
@@ -19,6 +22,10 @@ export async function PUT(req, { params }) {
 }
 
 export async function GET(req, { params }) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/404");
+
   const { id } = params;
   await connectMongoDB();
   const pustakawan = await Pustakawan.findById(id);
