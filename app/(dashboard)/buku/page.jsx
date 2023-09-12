@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 
 export default async function Buku() {
   const hostUrl = process.env.HOST_URL;
-  const apiUrl = `/api/buku`;
+  const apiUrl = `https://perpustakaan-sekolah.vercel.app/api/buku`;
 
   const { data } = await getData(apiUrl);
   return (
