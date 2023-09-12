@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 
 export default async function Buku() {
   const hostUrl = process.env.HOST_URL;
-  const apiUrl = `${hostUrl}/api/buku`;
+  const apiUrl = `api/buku`;
 
   const { data } = await getData(apiUrl);
   return (
