@@ -1,7 +1,5 @@
 import { headers } from "next/headers";
 
-export const dynamic = "force-static";
-
 export const getData = async (apiUrl) => {
   try {
     const res = await fetch(apiUrl, {
