@@ -7,7 +7,7 @@ export default async function PeminjamPage() {
   const hostUrl = process.env.HOST_URL;
   const apiUrl = `${hostUrl}/api/peminjam`;
 
-  const { data } = await getData(apiUrl);
+  // const { data } = await getData(apiUrl);
 
   return (
     <main>

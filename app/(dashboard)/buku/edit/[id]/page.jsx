@@ -9,7 +9,7 @@ const EditPage = async ({ params }) => {
   const hostUrl = process.env.HOST_URL;
   const apiUrl = `${hostUrl}/api/buku`;
 
-  const { buku } = await getDataById(apiUrl, id);
+  // const { buku } = await getDataById(apiUrl, id);
 
   return (
     <main>
