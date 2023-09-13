@@ -3,7 +3,8 @@ import { headers } from "next/headers";
 export const getData = async (apiUrl) => {
   try {
     const res = await fetch(apiUrl, {
-      cache: "no-store",
+      method: "GET",
+      headers: headers(),
     });
 
     if (!res.ok) {

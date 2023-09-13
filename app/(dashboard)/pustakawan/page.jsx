@@ -52,7 +52,7 @@ const PustakawanPage = async () => {
   return (
     <main>
       <h1 className="font-bold text-2xl text-gray-700 mb-5">
-        Daftar Pustakawan
+        Daftar Pustakawan ${apiUrl}
       </h1>
       <Table apiUrl={apiUrl} data={data} />
     </main>
