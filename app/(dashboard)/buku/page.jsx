@@ -69,7 +69,7 @@ export default async function Buku() {
 
   return (
     <main>
-      <h1 className="font-bold text-2xl text-gray-700 mb-5">Daftar Buku</h1>
+      <h1 className="font-bold text-2xl text-gray-700 mb-5">Daftar Buku </h1>
       <BukuTable apiUrl={apiUrl} data={data} />
     </main>
   );
