@@ -25,7 +25,19 @@ const getPeminjam = async (id) => {
 
 const EditPage = async ({ params }) => {
   const id = params.id;
-  const { peminjam } = await getPeminjam(id);
+  // const { peminjam } = await getPeminjam(id);
+  const peminjam = {
+    _id: "64bd13a857212509ffd8e259",
+    nama: "M Angga Andriansya",
+    noHp: "081254889785",
+    alamat: "Jl. Sekeawi No. 10, Margahayu Selatan, Kab. Bandung",
+    status: "Staff",
+    kelas: "XI RPL 3",
+    angkatan: 2016,
+    createdAt: "2023-07-23T11:48:56.667Z",
+    updatedAt: "2023-09-11T14:35:19.842Z",
+    __v: 0,
+  };
 
   return (
     <main>

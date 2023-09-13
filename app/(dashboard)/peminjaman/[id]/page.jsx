@@ -9,7 +9,47 @@ const TambahForm = async ({ params }) => {
   const apiUrl = `${hostUrl}/api/peminjaman`;
 
   const id = params.id;
-  const { peminjaman } = await getDataById(apiUrl, id);
+  // const { peminjaman } = await getDataById(apiUrl, id);
+  const peminjaman = {
+    peminjam: {
+      _id: "64ff2403012de3eae4273c30",
+      nama: "heru",
+      noHp: "081234578978",
+      alamat: "Jl. Sekeawi No. 10, Margahayu Selatan, Kab. Bandung",
+      status: "Siswa",
+      kelas: "XI RPL 2",
+      angkatan: 2016,
+    },
+    pustakawan: {
+      _id: "64bd107557212509ffd8e253",
+      nama: "Heru",
+      jabatan: "Petugas",
+    },
+    _id: "65002ead7be8b49e47b7a3d5",
+    buku: [
+      {
+        _id: "64bcf6cfe15b16af5f8b060e",
+        judul: "Laskar Pelangi",
+        pengarang: "Andrea Hirata",
+        penerbit: "Bentang Pustaka",
+        tahunTerbit: 2005,
+        isbn: "979-3062-79-7",
+      },
+      {
+        _id: "64c0e541ae0ce069212a1538",
+        judul: "Filosofi Teras",
+        pengarang: "Henry Manampiring",
+        penerbit: "Penerbit Buku Kompas",
+        tahunTerbit: 2019,
+        isbn: "978-602-412-518-9",
+      },
+    ],
+    status: "Sudah dikembalikan",
+    createdAt: "2023-09-12T09:26:05.051Z",
+    updatedAt: "2023-09-12T09:27:03.688Z",
+    __v: 0,
+    tanggalPengembalian: "2023-09-12T09:27:03.579Z",
+  };
 
   const peminjam = peminjaman.peminjam || {};
   const buku = peminjaman.buku || [];
