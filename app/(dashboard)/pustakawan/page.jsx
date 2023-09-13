@@ -7,7 +7,7 @@ const hostUrl = process.env.HOST_URL;
 const apiUrl = `${hostUrl}/api/pustakawan`;
 
 const PustakawanPage = async () => {
-  // const { data } = await getData(apiUrl);
+  const { data } = await getData(apiUrl);
   return (
     <main>
       <h1 className="font-bold text-2xl text-gray-700 mb-5">

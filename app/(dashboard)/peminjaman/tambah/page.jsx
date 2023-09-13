@@ -9,8 +9,8 @@ const TambahPage = async () => {
   const peminjamApiUrl = `${hostUrl}/api/peminjam`;
   const bukuApiUrl = `${hostUrl}/api/buku`;
 
-  // const { data: dataPeminjam } = await getData(peminjamApiUrl);
-  // const { data: dataBuku } = await getData(bukuApiUrl);
+  const { data: dataPeminjam } = await getData(peminjamApiUrl);
+  const { data: dataBuku } = await getData(bukuApiUrl);
 
   return (
     <main>

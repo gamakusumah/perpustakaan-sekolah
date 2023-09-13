@@ -25,7 +25,7 @@ const getPustakawan = async (id) => {
 
 const EditPage = async ({ params }) => {
   const id = params.id;
-  // const { pustakawan } = await getPustakawan(id);
+  const { pustakawan } = await getPustakawan(id);
   return (
     <main>
       <EditForm apiUrl={apiUrl} pustakawan={pustakawan} />

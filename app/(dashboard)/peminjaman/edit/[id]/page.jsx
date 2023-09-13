@@ -11,9 +11,9 @@ const EditPage = async ({ params }) => {
 
   const id = params.id;
 
-  // const { peminjaman } = await getDataById(peminjamanApiUrl, id);
-  // const { data: dataPeminjam } = await getData(peminjamApiUrl);
-  // const { data: dataBuku } = await getData(bukuApiUrl);
+  const { peminjaman } = await getDataById(peminjamanApiUrl, id);
+  const { data: dataPeminjam } = await getData(peminjamApiUrl);
+  const { data: dataBuku } = await getData(bukuApiUrl);
 
   return (
     <main>

@@ -25,7 +25,7 @@ const getPeminjam = async (id) => {
 
 const EditPage = async ({ params }) => {
   const id = params.id;
-  // const { peminjam } = await getPeminjam(id);
+  const { peminjam } = await getPeminjam(id);
 
   return (
     <main>
