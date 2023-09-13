@@ -19,10 +19,6 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) redirect("/404");
-
   await connectMongoDB();
   const data = await Buku.find();
   return NextResponse.json({ data }, { status: 200 });
