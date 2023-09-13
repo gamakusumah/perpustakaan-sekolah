@@ -1,5 +1,5 @@
 import BukuTable from "./components/BukuTable";
-import { getData } from "@/libs/functions";
+import { headers } from "next/headers";
 
 export default async function Buku() {
   const hostUrl = process.env.HOST_URL;
@@ -8,7 +8,8 @@ export default async function Buku() {
   const getData = async () => {
     try {
       const res = await fetch(apiUrl, {
-        cache: "no-store",
+        method: "GET",
+        headers: headers(),
       });
 
       if (!res.ok) {
