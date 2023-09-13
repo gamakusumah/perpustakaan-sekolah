@@ -1,5 +1,6 @@
 import BukuTable from "./components/BukuTable";
 import { headers } from "next/headers";
+export const dynamic = "force-static";
 
 export default async function Buku() {
   const hostUrl = process.env.HOST_URL;
