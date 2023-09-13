@@ -19,6 +19,10 @@ export async function POST(req) {
 }
 
 export async function GET() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) return NextResponse.json({ message: "Forbidden", session });
+
   await connectMongoDB();
   const data = await Buku.find();
   return NextResponse.json({ data }, { status: 200 });
