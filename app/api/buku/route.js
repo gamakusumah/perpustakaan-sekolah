@@ -19,7 +19,7 @@ export async function POST(req) {
 }
 
 export async function GET() {
-  const session = await getServerSession(authOptions);
+  const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
   if (!session) return NextResponse.json({ message: "Forbidden", session });
 

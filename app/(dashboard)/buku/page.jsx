@@ -1,29 +1,27 @@
 import BukuTable from "./components/BukuTable";
 import { headers } from "next/headers";
+import connectMongoDB from "@/libs/mongodb";
+import Buku from "@/models/buku";
+
 export const dynamic = "force-static";
 
-export default async function Buku() {
+export default async function BukuPage() {
   const hostUrl = process.env.HOST_URL;
   const apiUrl = "https://perpustakaan-sekolah.vercel.app/api/buku";
 
   const getData = async () => {
     try {
-      const res = await fetch(apiUrl, {
-        method: "GET",
-        headers: headers(),
-      });
+      await connectMongoDB();
+      const data = await Buku.find();
 
-      if (!res.ok) {
-        throw new Error("Gagal memuat data");
-      }
-
-      return res.json();
+      return data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const { data } = await getData();
+  const data = await JSON.parse(JSON.stringify(await getData()));
+  console.log(data);
 
   // const data = [
   //   {
